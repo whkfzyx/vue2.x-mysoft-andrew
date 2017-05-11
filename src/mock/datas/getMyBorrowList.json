@@ -1,0 +1,42 @@
+{
+  "list": [
+    {
+      "orderId": "2342-2557-7892",
+      "name": "水性笔",
+      "type": "lowValue",
+      "assetSN": "",
+      "date": 1494296255000,
+      "returnDate": "",
+      "shouldReturnDate": ""
+    },
+    {
+      "orderId": "2342-2557-7892",
+      "name": "转接线",
+      "type": "fixedAsset",
+      "assetSN": "SN7457322",
+      "date": 1494296255000,
+      "returnDate": "",
+      "shouldReturnDate": 1494299255000
+    },
+    {
+      "orderId": "2342-2557-7892",
+      "name": "转接线",
+      "type": "fixedAsset",
+      "assetSN": "SN7457322",
+      "date": 1494296255000,
+      "returnDate": 1494297255000,
+      "shouldReturnDate": 1494299255000
+    },
+    {
+      "orderId": "2342-2557-7892",
+      "name": "转接线",
+      "type": "fixedAsset",
+      "assetSN": "SN7457322",
+      "date": 1491296255000,
+      "returnDate": "",
+      "shouldReturnDate": 1492299255000
+    }
+  ],
+  "page": 1,
+  "pageSize": 20
+}

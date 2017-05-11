@@ -64,6 +64,9 @@ app.use(hotMiddleware)
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
+//本地图片库
+app.use('/image',express.static('./src/mock/images'))
+
 var uri = 'http://localhost:' + port
 
 devMiddleware.waitUntilValid(function () {
