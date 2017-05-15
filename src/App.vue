@@ -3,14 +3,16 @@
     <view-box ref="viewBox"
               :body-padding-bottom="$route.meta.tab ? '54px' : '0' ">
       <router-view class="view"></router-view>
-      <tabbar slot="bottom" v-if="$route.meta.tab">
+      <tabbar slot="bottom"
+              v-if="$route.meta.tab">
         <tabbar-item :link="{path:'/'}"
                      :selected="$route.name === 'index'">
           <span class="icon iconfont icon-lingwuzhongxin icon-20 tab-color"
                 slot="icon"></span>
           <span class="icon iconfont icon-lingwuzhongxin_ icon-20 tab-color"
                 slot="icon-active"></span>
-          <span class="tab-color" slot="label">购物中心</span>
+          <span class="tab-color"
+                slot="label">购物中心</span>
         </tabbar-item>
         <tabbar-item :link="{path:'/about-me'}"
                      :selected="$route.name === 'about-me'">
@@ -18,7 +20,8 @@
                 slot="icon"></span>
           <span class="icon iconfont icon-wodelingwu_ icon-20 tab-color"
                 slot="icon-active"></span>
-          <span class="tab-color" slot="label">我的领取</span>
+          <span class="tab-color"
+                slot="label">我的领取</span>
         </tabbar-item>
       </tabbar>
     </view-box>
@@ -62,7 +65,7 @@ body {
   font-size: 20px;
 }
 
-.weui-bar__item_on .tab-color{
+.weui-bar__item_on .tab-color {
   color: #4683C5;
 }
 </style>
