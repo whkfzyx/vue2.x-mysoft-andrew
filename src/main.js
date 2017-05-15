@@ -5,7 +5,6 @@ import App from './App'
 import router from './router'
 import './mock/index'
 
-
 Vue.use(VueRouter)
 
 import { LocalePlugin, DevicePlugin, ToastPlugin, AlertPlugin, ConfirmPlugin, LoadingPlugin, WechatPlugin, AjaxPlugin } from 'vux'
