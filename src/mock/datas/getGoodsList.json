@@ -8,62 +8,62 @@
         {
           "goodsId": "44234-634234-734641",
           "name": "纸巾",
-          "img": "/images/pic1.png"
+          "img": "/image/pic1.png"
         },
         {
           "goodsId": "24234-634234-734642",
           "name": "中性笔",
-          "img": "/images/pic2.png"
+          "img": "/image/pic2.png"
         },
         {
           "goodsId": "94234-634234-734643",
           "name": "草稿本",
-          "img": "/images/pic3.png"
+          "img": "/image/pic3.png"
         },
         {
           "goodsId": "14234-634234-734644",
           "name": "订书针",
-          "img": "/images/pic4.png"
+          "img": "/image/pic4.png"
         },
         {
           "goodsId": "44234-634234-734645",
           "name": "回形针",
-          "img": "/images/pic5.png"
+          "img": "/image/pic5.png"
         },
         {
           "goodsId": "44234-634234-734645",
           "name": "电池",
-          "img": "/images/pic6.png"
+          "img": "/image/pic6.png"
         },
         {
           "goodsId": "44234-634234-734645",
           "name": "胶水",
-          "img": "/images/pic7.png"
+          "img": "/image/pic7.png"
         },
         {
           "goodsId": "44234-634234-734645",
           "name": "马克笔",
-          "img": "/images/pic8.png"
+          "img": "/image/pic8.png"
         },
         {
           "goodsId": "44234-634234-734645",
           "name": "透明胶带",
-          "img": "/images/pic9.png"
+          "img": "/image/pic9.png"
         },
         {
           "goodsId": "44234-634234-734645",
           "name": "剪刀",
-          "img": "/images/pic10.png"
+          "img": "/image/pic10.png"
         },
         {
           "goodsId": "44234-634234-734645",
           "name": "文件夹",
-          "img": "/images/pic11.png"
+          "img": "/image/pic11.png"
         },
         {
           "goodsId": "44234-634234-734645",
           "name": "便利贴",
-          "img": "/images/pic13.png"
+          "img": "/image/pic13.png"
         }
       ]
     },
@@ -75,22 +75,22 @@
         {
           "goodsId": "44234-634234-734646",
           "name": "笔记本电脑",
-          "img": "/images/pic14.png"
+          "img": "/image/pic14.png"
         },
         {
           "goodsId": "44234-634234-734645",
           "name": "订书机",
-          "img": "/images/pic12.png"
+          "img": "/image/pic12.png"
         },
         {
           "goodsId": "44234-634234-734646",
           "name": "笔记本电脑",
-          "img": "/images/pic14.png"
+          "img": "/image/pic14.png"
         },
         {
           "goodsId": "44234-634234-734645",
           "name": "订书机",
-          "img": "/images/pic12.png"
+          "img": "/image/pic12.png"
         }
       ]
     },
@@ -102,17 +102,17 @@
         {
           "goodsId": "44234-634234-734649",
           "name": "雨伞",
-          "img": "/images/pic16.jpg"
+          "img": "/image/pic16.jpg"
         },
         {
           "goodsId": "24234-634234-734650",
           "name": "充电宝",
-          "img": "/images/pic15.jpg"
+          "img": "/image/pic15.jpg"
         },
         {
           "goodsId": "94234-634234-734651",
           "name": "热水袋",
-          "img": "/images/pic17.jpg"
+          "img": "/image/pic17.jpg"
         }
       ]
     }
