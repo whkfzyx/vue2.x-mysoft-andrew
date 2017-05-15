@@ -1,11 +1,12 @@
 {
-  "goodsId": "21313",
-  "type": "lowValue",
-  "name": "中性笔",
-  "img": "http://mingyuanyun.com/some.jpg",
-  "description": "",
-  "frequency": 4,
-  "alreadyHave": 2,
-  "duration": 0,
-  "stock": 100 
+    "goodsId": "24234-634234-734642",
+    "assetSN": "wh001",
+    "type": "fixedAsset",
+    "name": "笔记本",
+    "img": "/image/pic14.png",
+    "description": "按规定日期归还，如有损坏，按照惯例制度，赔偿4000元。",
+    "frequency": 4,
+    "alreadyHave": 2,
+    "duration": 8643000,
+    "stock": 100
 }
