@@ -9,7 +9,7 @@
                    :key="goodListItem.goodsId"
                    :link="getGoodDtlPath(goodListItem)">
           <img slot="icon"
-               src="../mock/images/pic1.png">
+               :src="goodListItem.img">
                 <span slot="label">{{goodListItem.name}}</span>
         </grid-item>
       </grid>
@@ -19,7 +19,7 @@
 
 <script>
 import { Grid, GridItem, GroupTitle } from 'vux'
-import Axios from 'axios'
+// import Axios from 'axios'
 
 export default {
   data () {
@@ -31,7 +31,7 @@ export default {
   // 请求数据
   mounted: function () {
     var me = this
-    Axios.get('/getgoodslist').then(function (result) {
+    this.$http.get('/getgoodslist').then(function (result) {
       me.typeList = result.data.typelist
     }).catch(function (ex) {
       console.log(ex)
