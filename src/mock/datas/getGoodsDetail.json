@@ -1,12 +1,15 @@
 {
-    "goodsId": "24234-634234-734642",
-    "assetSN": "wh001",
-    "type": "fixedAsset",
-    "name": "笔记本",
+  "success": true,
+  "msg": "",
+  "data": {
+    "orderId": "2342-2557-7892",
+    "name": "转接线",
+    "department": "IT",
+    "assetSN": "SN632457",
+    "num": 1,
     "img": "/image/pic14.png",
-    "description": "按规定日期归还，如有损坏，按照惯例制度，赔偿4000元。",
-    "frequency": 4,
-    "alreadyHave": 2,
-    "duration": 8643000,
-    "stock": 100
+    "date": 1494296255000,
+    "returnDate": 1494296955000,
+    "shouldReturnDate": 1494298255000
+  }
 }
