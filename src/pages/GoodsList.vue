@@ -23,7 +23,8 @@ import { Grid, GridItem, GroupTitle } from 'vux'
 export default {
   data () {
     return {
-      typeList: []
+      typeList: [],
+      test: '123'
     }
   },
   // 请求数据
