@@ -10,7 +10,7 @@
                    :link="getGoodDtlPath(goodListItem)">
           <img slot="icon"
                :src="goodListItem.img">
-                <span slot="label">{{goodListItem.name}}</span>
+          <span slot="label">{{goodListItem.name}}</span>
         </grid-item>
       </grid>
     </div>
@@ -19,13 +19,12 @@
 
 <script>
 import { Grid, GridItem, GroupTitle } from 'vux'
-// import Axios from 'axios'
 
 export default {
   data () {
     return {
       typeList: [],
-      msg: '123'
+      test: '123'
     }
   },
   // 请求数据
