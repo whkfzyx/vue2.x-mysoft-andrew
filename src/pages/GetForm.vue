@@ -29,11 +29,35 @@
         <x-button>取消</x-button>
       </router-link>
     </div>
+
+    <!--modal-->
+    <x-dialog v-model="showModal" class="dialog">
+      <div class="img-box">
+        <img src="https://oixyh3u6e.qnssl.com/livingearth/livingearth.png" style="max-width:100%">
+      </div>
+      <div class="msg">
+        <div>
+          领取成功！
+        </div>
+        <div>
+          你本月已经领取 <span class="num">{{}}</span> 个了～
+        </div>
+        <div>
+          省着点用哦～
+        </div>
+      </div>
+
+      <div class="get" @click="showModal=false">
+        <div class="get-btn">我知道啦</div>
+      </div>
+    </x-dialog>
   </div>
 </template>
 
 <script>
-  import { Grid, GridItem, GroupTitle, XNumber, XButton } from 'vux'
+  import { Grid, GridItem, GroupTitle, XNumber, XButton, XDialog } from 'vux'
+  import fetch from '../utils/fetch'
+  import config from '../utils/config'
 
   export default {
     name: 'lowValueDetail',
@@ -42,7 +66,8 @@
       GridItem,
       GroupTitle,
       XNumber,
-      XButton
+      XButton,
+      XDialog
     },
     data () {
       return {
@@ -57,8 +82,17 @@
           duration: 0, // 可借用时长，单位：秒。为0表示不限制时长
           stock: 100  // 库存
         },
-        form: {num: 0}
+        form: {num: 0},
+        showModal: true
       }
+    },
+    created () {
+      fetch({
+        url: config.API_SERVER + 'getgoodsdetail?token=1&goodsId=2',
+        method: 'GET'
+      }).then(resp => {
+        this.goodsInfo = resp.data
+      })
     },
     methods: {
       onNumChange: (value) => {
@@ -113,6 +147,28 @@
       .btn-cancel {
         display: block;
         margin-top: 10px;
+      }
+    }
+    .dialog {
+      .msg {
+        text-align: center;
+        font-size: 18px;
+        color: #555;
+        .num {
+          color: #1492d5;
+        }
+      }
+      .get {
+        margin: 15px auto;
+        .get-btn {
+          color: #fff;
+          margin: 0 auto;
+          display: inline-block;
+          text-align: center;
+          background-color: #4382c7;
+          border-radius: 50px;
+          padding: 3px 25px;
+        }
       }
     }
   }

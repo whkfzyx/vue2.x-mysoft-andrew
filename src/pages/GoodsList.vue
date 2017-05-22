@@ -20,6 +20,7 @@
 
 <script>
   import { Grid, GridItem, GroupTitle } from 'vux'
+  import config from '../utils/config'
 
   export default {
     data () {
@@ -30,7 +31,7 @@
     },
     // 请求数据
     mounted: function () {
-      this.$http.get('http://local.wechattest.com/andrew/api/getgoodslist?token=60909YlpcOVk7_myy_9ieK2yLKUgwnApBz6txamFgsRiUk9_my_JQ').then(function (result) {
+      this.$http.get(config.API_SERVER + 'getgoodslist?token=60909YlpcOVk7_myy_9ieK2yLKUgwnApBz6txamFgsRiUk9_my_JQ').then(function (result) {
         this.typeList = result.data.data.typelist
       }.bind(this)).catch(function (ex) {
         console.log(ex)
