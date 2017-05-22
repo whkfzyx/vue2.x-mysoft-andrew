@@ -7,10 +7,10 @@
       <grid :rows="4">
         <grid-item v-for="goodListItem  in typeListItem.list"
                    :key="goodListItem.goodsId"
-                   :link="getGoodDtlPath(goodListItem)">
+                   :link="getGoodDtlPath(goodListItem,typeListItem)">
           <img slot="icon"
                :src="goodListItem.img">
-                <span slot="label">{{goodListItem.name}}</span>
+          <span slot="label">{{goodListItem.name}}</span>
         </grid-item>
       </grid>
     </div>
@@ -19,13 +19,12 @@
 
 <script>
 import { Grid, GridItem, GroupTitle } from 'vux'
-// import Axios from 'axios'
 
 export default {
   data () {
     return {
       typeList: [],
-      msg: '123'
+      test: '123'
     }
   },
   // 请求数据
@@ -49,8 +48,12 @@ export default {
     getImgPath (path) {
       return '../mock' + path
     },
-    getGoodDtlPath (goodListItem) {
-      return { path: '/goods-detail', query: { goodsId: goodListItem.goodsId } }
+    getGoodDtlPath (goodListItem, typeListItem) {
+      var objPath = { path: '/get-form', query: { goodsId: goodListItem.goodsId } }
+      if (typeListItem.value === '固定资产') {
+        objPath.path = '/borrow-form'
+      }
+      return objPath
     }
   }
 }

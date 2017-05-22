@@ -1,11 +1,15 @@
 {
-  "orderId": "2342-2557-7892",
-  "name": "转接线",
-  "department": "IT",
-  "assetSN": "SN632457",
-  "num": 1,
-  "img": "http://mingyuanyun.com/some.jpg",
-  "date": 1494296255000,
-  "returnDate": 1494296955000,
-  "shouldReturnDate": 1494298255000
+  "success": true,
+  "msg": "",
+  "data": {
+    "orderId": "2342-2557-7892",
+    "name": "转接线",
+    "department": "IT",
+    "assetSN": "SN632457",
+    "num": 1,
+    "img": "/image/pic14.png",
+    "date": 1494296255000,
+    "returnDate": 1494296955000,
+    "shouldReturnDate": 1494298255000
+  }
 }
