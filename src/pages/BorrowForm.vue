@@ -13,6 +13,7 @@
       <span>{{ GoodsDetail.description }}</span>
     </div>
     
+
     <!--<box gap="30px 20px 20px"> -->
     <div class="div-button">
       <x-button class="btn-black"
@@ -39,6 +40,7 @@
 </template>
 
 <script>
+
 import { Group, XImg, Box, XInput, XButton, Cell, XDialog } from 'vux'
 
 export default {
