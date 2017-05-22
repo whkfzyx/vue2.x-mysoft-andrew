@@ -1,13 +1,11 @@
 <template>
   <div class="demo">
-  
     <img :src="imgurl"
          class="big-img" />
     <form-preview header-label="产品名称"
                   :header-value="headervalue"
                   :body-items="list"
                   :footer-buttons="btnconfirm"></form-preview>
-    <date-format></date-format>
   </div>
 </template>
 
@@ -16,8 +14,7 @@ import {
   Group,
   Cell,
   FormPreview,
-  dateFormat,
-  Clocker
+  dateFormat
 } from 'vux'
 export default {
   name: 'demo',
@@ -25,8 +22,7 @@ export default {
     Group,
     Cell,
     FormPreview,
-    dateFormat,
-    Clocker
+    dateFormat
   },
   data () {
     return {
@@ -44,14 +40,28 @@ export default {
   },
   methods: {
     loadList () {
+      var curDate = new Date().getTime()
       this.$http.get('/getmyborrowdetail').then((res) => {
         var d = res.data.data
+        var status = '已关闭'
         this.imgurl = d.img
         this.headervalue = d.name
-
+        if (d.shouldReturnDate) {
+          if (d.returnDate) {
+            if (d.returnDate <= d.shouldReturnDate) {
+              status = '已归还'
+            } else {
+              status = '超期归还'
+            }
+          } else if (curDate <= d.shouldReturnDate) {
+            status = '待归还'
+          } else {
+            status = '借用超期'
+          }
+        }
         this.list.push({
           label: '当前状态',
-          value: '待还中'
+          value: status
         })
         this.list.push({
           label: '领取时间',
