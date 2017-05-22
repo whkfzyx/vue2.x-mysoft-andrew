@@ -1,7 +1,8 @@
+<!--固定资产详情-->
 <template>
   <div class="Borrow-Form">
     <img :src="GoodsDetail.img" class="img-demo"></img>
-    
+
     <div class="content-div">
       <p class="title-p">产品编号</p>
       <div class="input-div">
@@ -12,7 +13,7 @@
       <p class="title-p">领用说明</p>
       <span>{{ GoodsDetail.description }}</span>
     </div>
-    
+
 
     <!--<box gap="30px 20px 20px"> -->
     <div class="div-button">
