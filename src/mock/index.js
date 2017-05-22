@@ -8,5 +8,6 @@ mock.onGet('/getgoodsdetail').reply(200, require('./datas/getGoodsDetail.json'))
 mock.onGet('/getmyborrowdetail').reply(200, require('./datas/getMyBorrowDetail.json'))
 mock.onGet('/getmyborrowlist').reply(200, require('./datas/getMyBorrowList.json'))
 mock.onGet('/submitborrow').reply(200, require('./datas/submitBorrow.json'))
+mock.onPost('/submitborrow').reply(200, require('./datas/submitBorrow.json'))
 
 export default mock

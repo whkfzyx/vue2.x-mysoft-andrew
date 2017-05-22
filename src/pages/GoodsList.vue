@@ -7,7 +7,7 @@
       <grid :rows="4">
         <grid-item v-for="goodListItem  in typeListItem.list"
                    :key="goodListItem.goodsId"
-                   :link="getGoodDtlPath(goodListItem)">
+                   :link="getGoodDtlPath(goodListItem,typeListItem)">
           <img slot="icon"
                :src="goodListItem.img">
           <span slot="label">{{goodListItem.name}}</span>
@@ -48,8 +48,12 @@ export default {
     getImgPath (path) {
       return '../mock' + path
     },
-    getGoodDtlPath (goodListItem) {
-      return { path: '/goods-detail', query: { goodsId: goodListItem.goodsId } }
+    getGoodDtlPath (goodListItem, typeListItem) {
+      var objPath = { path: '/get-form', query: { goodsId: goodListItem.goodsId } }
+      if (typeListItem.value === '固定资产') {
+        objPath.path = '/borrow-form'
+      }
+      return objPath
     }
   }
 }
