@@ -18,7 +18,6 @@
       </cell>
     </group>
     <!--<load-more tip="正在加载"></load-more>-->
-
   </div>
 </template>
 
@@ -60,20 +59,20 @@
         return '../mock' + path
       },
       getGoodDtlPath (goodListItem) {
-        return {path: '/order-detail', query: {goodsId: goodListItem.goodsId, token: this.$route.query.token}}
+        return {path: '/order-detail', query: {orderId: goodListItem.orderId, token: this.$route.query.token}}
       },
       getDateString (iDate) {
-        var myDate = new Date(iDate)
-        var myYear = myDate.getFullYear()
-        var myMonth = myDate.getMonth() + 1
-        var myDay = myDate.getDate()
-        var myMonthStr = myMonth < 10 ? ('0' + myMonth) : (myMonth + '')
-        var myDayStr = myDay < 10 ? ('0' + myDay) : (myDay + '')
-        var result = myYear + '-' + myMonthStr + '-' + myDayStr
+        let myDate = new Date(iDate)
+        let myYear = myDate.getFullYear()
+        let myMonth = myDate.getMonth() + 1
+        let myDay = myDate.getDate()
+        let myMonthStr = myMonth < 10 ? ('0' + myMonth) : (myMonth + '')
+        let myDayStr = myDay < 10 ? ('0' + myDay) : (myDay + '')
+        let result = myYear + '-' + myMonthStr + '-' + myDayStr
         return result
       },
       getLyDateString (iDate) {
-        var result = ''
+        let result = ''
         result = this.getDateString(iDate)
         result = '领用时间:' + result
         return result
@@ -82,6 +81,9 @@
   }
 </script>
 <style scoped lange="less">
+  .my-borrow-list {
+  }
+
   .cell-icon {
     height: 64px;
     width: 64px;

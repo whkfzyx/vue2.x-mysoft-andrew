@@ -3,6 +3,7 @@
     <view-box ref="viewBox"
               :body-padding-bottom="$route.meta.tab ? '54px' : '0' ">
       <router-view class="view"></router-view>
+
       <tabbar slot="bottom"
               v-if="$route.meta.tab">
         <tabbar-item :link="{path:'/',query: {token: this.$route.query.token}}"
@@ -46,7 +47,7 @@
   @import './assets/less/iconfont.less';
 
   body {
-    background-color: #fbf9fe;
+    background-color: #fff;
     user-select: none;
   }
 

@@ -1,10 +1,13 @@
 <!--订单详情-->
 <template>
-  <div class="demo">
-    <img :src="imgurl"
-         class="big-img"/>
+  <div class="order-detail">
+    <!--top image-->
+    <div class="top-img">
+      <img v-if="orderInfo.img" :src="orderInfo.img" :alt="orderInfo.name">
+    </div>
+
     <form-preview header-label="产品名称"
-                  :header-value="headervalue"
+                  :header-value="orderInfo.name"
                   :body-items="list"
                   :footer-buttons="btnconfirm"></form-preview>
     <date-format></date-format>
@@ -13,41 +16,39 @@
 
 <script>
   import {
-    Group,
-    Cell,
     FormPreview,
-    dateFormat,
-    Clocker
+    dateFormat
   } from 'vux'
+  import fetch from '../utils/fetch'
+  import config from '../utils/config'
+  import router from '../router'
+
   export default {
-    name: 'demo',
+    name: 'orderDetail',
     components: {
-      Group,
-      Cell,
       FormPreview,
-      dateFormat,
-      Clocker
+      dateFormat
     },
     data () {
       return {
         list: [],
-        imgurl: '',
-        headervalue: '',
+        orderInfo: {},
         btnconfirm: [{
           style: 'primary',
           text: '确定',
           onButtonClick: (name) => {
-            window.history.go(-1)
+            router.push({path: '/about-me', query: {token: this.$route.query.token}})
           }
         }]
       }
     },
     methods: {
-      loadList () {
-        this.$http.get('/getmyborrowdetail').then((res) => {
-          var d = res.data.data
-          this.imgurl = d.img
-          this.headervalue = d.name
+      loadDetail () {
+        fetch({
+          url: config.API_SERVER + 'getmyborrowdetail?token=' + this.$route.query.token + '&orderId=' + this.$route.query.orderId
+        }).then((res) => {
+          let d = res.data
+          this.orderInfo = d
 
           this.list.push({
             label: '当前状态',
@@ -79,13 +80,26 @@
       }
     },
     created () {
-      this.loadList()
+      this.loadDetail()
     }
   }
 </script>
 
 <style lang="less">
-  .big-img {
-    width: 100%;
+  .order-detail {
+    .top-img {
+      position: relative;
+      width: 100%;
+      padding-top: 74.66%;
+      background-size: contain;
+      background-image: url(../assets/default-bg-img.png);
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+      }
+    }
   }
 </style>

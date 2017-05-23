@@ -10,11 +10,11 @@
     <div class="tips">要记得按时归还哦～</div>
 
     <div class="btns">
-      <router-link to="/about-me">
-        <x-button type="primary">确定</x-button>
+      <router-link :to="{path:'/order-detail',query:{token:this.$route.query.token,orderId:this.$route.query.orderId}}">
+        <x-button type="primary" action-type="button">确定</x-button>
       </router-link>
-      <router-link to="/" class="back">
-        <x-button>返回物品列表</x-button>
+      <router-link :to="{path:'/'}" class="back">
+        <x-button action-type="button">返回物品列表</x-button>
       </router-link>
     </div>
   </div>

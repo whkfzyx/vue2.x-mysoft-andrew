@@ -40,7 +40,7 @@
     <div class="btns">
       <x-button type="primary" v-if="!goodsInfo.stock" disabled>无库存</x-button>
       <x-button type="primary" v-else-if="!goodsInfo.need_return&&form.num<=0" disabled>请输入领用数</x-button>
-      <x-button type="primary" v-else>领取</x-button>
+      <x-button type="primary" v-else @click.native="onSubmit">领取</x-button>
       <router-link to="/" class="btn-cancel">
         <x-button>取消</x-button>
       </router-link>
@@ -74,6 +74,7 @@
   import { Grid, GridItem, GroupTitle, XNumber, XButton, XDialog, dateFormat, XInput } from 'vux'
   import fetch from '../utils/fetch'
   import config from '../utils/config'
+  import router from '../router'
 
   export default {
     name: 'goodsDetail',
@@ -100,7 +101,7 @@
           duration: 0, // 可借用时长，单位：秒。为0表示不限制时长
           stock: 100  // 库存
         },
-        form: {num: 0, goodsId: '', assetSn: ''},
+        form: {num: 1, goodsId: '', assetSn: ''},
         showModal: true
       }
     },
@@ -110,6 +111,18 @@
     methods: {
       onNumChange: (value) => {
         console.log(value)
+      },
+      onSubmit () {
+        fetch({
+          url: config.API_SERVER + 'submitborrow?&token=' + this.$route.query.token,
+          method: 'POST',
+          data: {...this.form, goodsId: this.$route.query.goodsId}
+        }).then((resp) => {
+          console.log(resp)
+          router.push({path: '/success', query: {token: this.$route.query.token, orderId: resp.data.orderId}})
+        }).catch((res) => {
+          console.log(res)
+        })
       },
       loadDetail () {
         fetch({

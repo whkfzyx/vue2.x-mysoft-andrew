@@ -1,6 +1,5 @@
 import axios from 'axios'
-import router from '../router'
-import config from './config'
+// import config from './config'
 
 export default function fetch (options) {
   return new Promise((resolve, reject) => {
@@ -14,7 +13,7 @@ export default function fetch (options) {
             console.log(res.message)
 
             // 重新登录页
-            router.push({path: config.LOGIN_PAGE})
+            // location.href = config.LOGIN_PAGE
           }
           reject(res)
         }
