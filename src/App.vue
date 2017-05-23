@@ -5,7 +5,7 @@
       <router-view class="view"></router-view>
       <tabbar slot="bottom"
               v-if="$route.meta.tab">
-        <tabbar-item :link="{path:'/'}"
+        <tabbar-item :link="{path:'/',query: {token: this.$route.query.token}}"
                      :selected="$route.name === 'index'">
           <span class="icon iconfont icon-lingwuzhongxin icon-20 tab-color"
                 slot="icon"></span>
@@ -14,7 +14,7 @@
           <span class="tab-color"
                 slot="label">购物中心</span>
         </tabbar-item>
-        <tabbar-item :link="{path:'/about-me'}"
+        <tabbar-item :link="{path:'/about-me',query: {token: this.$route.query.token,page:1,pageSize:20}}"
                      :selected="$route.name === 'about-me'">
           <span class="icon iconfont icon-wodelingwu icon-20 tab-color"
                 slot="icon"></span>
@@ -29,43 +29,43 @@
 </template>
 
 <script>
-import { ViewBox, Tabbar, TabbarItem } from 'vux'
+  import { ViewBox, Tabbar, TabbarItem } from 'vux'
 
-export default {
-  components: {
-    ViewBox,
-    Tabbar,
-    TabbarItem
+  export default {
+    components: {
+      ViewBox,
+      Tabbar,
+      TabbarItem
+    }
   }
-}
 </script>
 
 <style lang="less">
-@import '~vux/src/styles/reset.less';
-@import '~vux/src/styles/1px.less';
-@import './assets/less/iconfont.less';
+  @import '~vux/src/styles/reset.less';
+  @import '~vux/src/styles/1px.less';
+  @import './assets/less/iconfont.less';
 
-body {
-  background-color: #fbf9fe;
-  user-select: none;
-}
+  body {
+    background-color: #fbf9fe;
+    user-select: none;
+  }
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-  overflow-x: hidden;
-}
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
 
-.app-view {
-  height: 100%;
-}
+  .app-view {
+    height: 100%;
+  }
 
-.icon-20 {
-  font-size: 20px;
-}
+  .icon-20 {
+    font-size: 20px;
+  }
 
-.weui-bar__item_on .tab-color {
-  color: #4683C5;
-}
+  .weui-bar__item_on .tab-color {
+    color: #4683C5;
+  }
 </style>

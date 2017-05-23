@@ -24,6 +24,8 @@
 
 <script>
   import { Group, Cell, LoadMore, dateFormat } from 'vux'
+  import fetch from '../utils/fetch'
+  import config from '../utils/config'
 
   export default {
     data () {
@@ -40,9 +42,11 @@
       dateFormat
     },
     // 请求数据
-    mounted: function () {
-      var me = this
-      this.$http.get('/getmyborrowlist').then(function (result) {
+    created: function () {
+      let me = this
+      fetch({
+        url: config.API_SERVER + 'getmyborrowlist?page=' + this.$route.query.page + '&pageSize=' + this.$route.query.pageSize + '&token=' + this.$route.query.token
+      }).then(function (result) {
         me.list = result.data.list
       }).catch(function (ex) {
         console.log(ex)
@@ -50,13 +54,13 @@
     },
     methods: {
       onItemClick (goodListItem) {
-        this.$router.push({path: '/goods-detail', query: {goodsId: ''}})
+        this.$router.push({path: '/order-detail', query: {goodsId: ''}})
       },
       getImgPath (path) {
         return '../mock' + path
       },
       getGoodDtlPath (goodListItem) {
-        return {path: '/goods-detail', query: {goodsId: goodListItem.goodsId}}
+        return {path: '/order-detail', query: {goodsId: goodListItem.goodsId, token: this.$route.query.token}}
       },
       getDateString (iDate) {
         var myDate = new Date(iDate)
