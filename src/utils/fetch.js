@@ -4,29 +4,14 @@ import config from './config'
 
 export default function fetch (options) {
   return new Promise((resolve, reject) => {
-    const instance = axios.create({
-      timeout: 2000
-    })
+    const instance = axios.create()
     instance(options)
       .then(response => {
         const res = response.data
-        if (res.code !== 20000) {
-          console.log(options) // for debug
+        if (!res.success) {
           // Token 过期了
-          if (res.code === 50008) {
-            this.$vux.alert.show({
-              title: '',
-              content: res.message,
-              onShow () {
-                console.log('Plugin: I\'m showing')
-              },
-              onHide () {
-                console.log('Plugin: I\'m hiding now')
-              }
-            })
-            setTimeout(() => {
-              this.$vux.alert.hide()
-            }, 3000)
+          if (res.errcode === 4001) {
+            console.log(res.message)
 
             // 重新登录页
             router.push({path: config.LOGIN_PAGE})
@@ -36,17 +21,7 @@ export default function fetch (options) {
         resolve(res)
       })
       .catch(error => {
-        this.$vux.alert.show({
-          title: '',
-          content: '发生异常错误,请刷新页面重试,或联系程序员',
-          onShow () {
-            console.log('Plugin: I\'m showing')
-          },
-          onHide () {
-            console.log('Plugin: I\'m hiding now')
-          }
-        })
-
+        console.error('发生异常错误,请刷新页面重试,或联系程序员')
         console.log(error) // for debug
         reject(error)
       })

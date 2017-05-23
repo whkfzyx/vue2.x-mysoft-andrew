@@ -20,20 +20,25 @@
 
 <script>
   import { Grid, GridItem, GroupTitle } from 'vux'
+  import fetch from '../utils/fetch'
   import config from '../utils/config'
 
   export default {
     data () {
       return {
         typeList: [],
-        test: '123'
+        test: '123',
+        token: '9c83K2hSw8VrMGD_myy_pKxbWOf_my_Lgt2oJjWfYnaTAYDZ9JERg'
       }
     },
     // 请求数据
     mounted: function () {
-      this.$http.get(config.API_SERVER + 'getgoodslist?token=60909YlpcOVk7_myy_9ieK2yLKUgwnApBz6txamFgsRiUk9_my_JQ').then(function (result) {
-        this.typeList = result.data.data.typelist
-      }.bind(this)).catch(function (ex) {
+      let me = this
+      fetch({
+        url: config.API_SERVER + 'getgoodslist?token=9c83K2hSw8VrMGD_myy_pKxbWOf_my_Lgt2oJjWfYnaTAYDZ9JERg'
+      }).then((result) => {
+        me.typeList = result.data.typelist
+      }).catch(function (ex) {
         console.log(ex)
       })
     },
@@ -43,14 +48,8 @@
       GroupTitle
     },
     methods: {
-      onItemClick (goodListItem) {
-        this.$router.push({path: '/goods-detail', query: {goodsId: ''}})
-      },
-      getImgPath (path) {
-        return '../mock' + path
-      },
       getGoodDtlPath (goodListItem) {
-        return {path: '/goods-detail', query: {goodsId: goodListItem.goodsId}}
+        return {path: '/goods-detail', query: {goodsId: goodListItem.goodsId, token: this.token}}
       }
     }
   }
