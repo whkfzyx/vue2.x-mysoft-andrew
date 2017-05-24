@@ -13,7 +13,9 @@
       </cell>
     </group>
 
-    <load-more :tip="'正在加载'" :show-loading="false"></load-more>
+    <mugen-scroll :handler="fetchData" :should-handle="!loadingPage">
+      <load-more :tip="reachLastPage?'没有更多了':'正在加载'" :show-loading="false"></load-more>
+    </mugen-scroll>
   </div>
 </template>
 
@@ -22,31 +24,39 @@
   import fetch from '../utils/fetch'
   import config from '../utils/config'
   import moment from 'moment'
+  import MugenScroll from 'vue-mugen-scroll'
 
   export default {
     name: 'AboutMe',
     data () {
       return {
-        list: []
+        list: [],
+        reachLastPage: false,
+        currentPage: 1,
+        loadingPage: false
       }
     },
     components: {
       Group,
       Cell,
-      LoadMore
-    },
-    // 请求数据
-    created: function () {
-      let me = this
-      fetch({
-        url: config.API_SERVER + 'getmyborrowlist?page=' + this.$route.query.page + '&pageSize=' + this.$route.query.pageSize + '&token=' + this.$route.query.token
-      }).then(function (result) {
-        me.list = result.data.list
-      }).catch(function (ex) {
-        console.log(ex)
-      })
+      LoadMore,
+      MugenScroll
     },
     methods: {
+      fetchPage () {
+        fetch({
+          url: config.API_SERVER + 'getmyborrowlist?page=' + (this.currentPage || this.$route.query.page || 1) + '&pageSize=' + (this.$route.query.pageSize || 20) + '&token=' + this.$route.query.token
+        }).then((result) => {
+          this.list = this.list.concat(result.data.list)
+          if ((parseInt(result.data.count) + 20 - 1) / 20 < this.currentPage) {
+            this.currentPage += 1
+          } else {
+            this.reachLastPage = true
+          }
+        }).catch(function (ex) {
+          console.log(ex)
+        })
+      },
       getGoodDtlPath (goodListItem) {
         return {path: '/order-detail', query: {orderId: goodListItem.orderId, token: this.$route.query.token}}
       },
@@ -61,6 +71,11 @@
         }
 
         return str
+      },
+      fetchData () {
+        this.loadingPage = true
+        this.fetchPage()
+        this.loadingPage = false
       }
     }
   }

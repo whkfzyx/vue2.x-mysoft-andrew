@@ -10,7 +10,6 @@
                   :header-value="orderInfo.name"
                   :body-items="list"
                   :footer-buttons="btnconfirm"></form-preview>
-    <date-format></date-format>
   </div>
 </template>
 
@@ -45,10 +44,29 @@
           let d = res.data
           this.orderInfo = d
 
-          this.list.push({
-            label: '当前状态',
-            value: '待还中'
-          })
+          if (d.shouldReturnDate === '0') {
+            this.list.push({
+              label: '当前状态',
+              value: '已结束'
+            })
+          } else if (d.shouldReturnDate !== '0' && d.returnDate === '0') {
+            if (d.shouldReturnDate > moment(moment().format('YYYY-MM-DD')).format('X')) {
+              this.list.push({
+                label: '当前状态',
+                value: '借用中'
+              })
+            } else {
+              this.list.push({
+                label: '当前状态',
+                value: '已超期'
+              })
+            }
+          } else if (d.shouldReturnDate !== '0' && d.returnDate !== '0') {
+            this.list.push({
+              label: '当前状态',
+              value: '借用中'
+            })
+          }
           this.list.push({
             label: '领取时间',
             value: moment(parseInt(d.date) * 1000).format('YYYY-MM-DD HH:mm:ss')
