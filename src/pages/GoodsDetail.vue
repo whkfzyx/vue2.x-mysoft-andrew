@@ -16,8 +16,7 @@
 
       <group-title>领用数量</group-title>
       <div class="info-item">
-        <x-number :title="''" :value="0" :min="0" :max="goodsInfo.stock" v-model="form.num"
-                  @on-change="onNumChange"></x-number>
+        <x-number :title="''" :value="0" :min="0" :max="parseInt(goodsInfo.stock)" v-model="form.num"></x-number>
         <div class="sub form-height">（库存剩余 <span class="num">{{goodsInfo.stock}}</span>）</div>
       </div>
     </div>
@@ -49,22 +48,24 @@
     <!--modal-->
     <x-dialog v-model="showModal" class="dialog">
       <div class="img-box">
-        <img src="https://oixyh3u6e.qnssl.com/livingearth/livingearth.png" style="max-width:100%">
+        <img src="../assets/limit-tips.jpg" style="max-width:100%;height:auto;">
       </div>
       <div class="msg">
         <div>
           领取成功！
         </div>
         <div>
-          你本月已经领取 <span class="num">{{}}</span> 个了～
+          你本月已经领取 <span class="num">{{alreadyHave}}</span> 个了～
         </div>
         <div>
           省着点用哦～
         </div>
       </div>
 
-      <div class="get" @click="showModal=false">
-        <div class="get-btn">我知道啦</div>
+      <div class="get">
+        <router-link :to="{path: '/success', query: {token: this.$route.query.token, orderId: orderId}}">
+          <div class="get-btn">我知道啦</div>
+        </router-link>
       </div>
     </x-dialog>
   </div>
@@ -91,35 +92,39 @@
     data () {
       return {
         goodsInfo: {
-          goodsId: '21313',  // 物品ID
-          type: 'lowValue', // 物品类型
-          name: '中性笔',  // 物品名称
-          img: 'https://oixyh3u6e.qnssl.com/livingearth/livingearth.png', // 图片
+          goodsId: '',  // 物品ID
+          type: '', // 物品类型
+          name: '',  // 物品名称
+          img: '', // 图片
           description: '', // 描述信息，可能为空
-          frequency: 4, // 月领取上限
-          alreadyHave: 2,   // 本月已领数量
+          frequency: 0, // 月领取上限
+          alreadyHave: 0,   // 本月已领数量
           duration: 0, // 可借用时长，单位：秒。为0表示不限制时长
-          stock: 100  // 库存
+          stock: 0  // 库存
         },
         form: {num: 1, goodsId: '', assetSn: ''},
-        showModal: true
+        showModal: false,
+        alreadyHave: 0,
+        orderId: ''
       }
     },
     created () {
       this.loadDetail()
     },
     methods: {
-      onNumChange: (value) => {
-        console.log(value)
-      },
       onSubmit () {
         fetch({
           url: config.API_SERVER + 'submitborrow?&token=' + this.$route.query.token,
           method: 'POST',
           data: {...this.form, goodsId: this.$route.query.goodsId}
         }).then((resp) => {
-          console.log(resp)
-          router.push({path: '/success', query: {token: this.$route.query.token, orderId: resp.data.orderId}})
+          if (resp.data.alreadyHave > parseInt(this.goodsInfo.frequency)) {
+            this.alreadyHave = resp.data.alreadyHave
+            this.orderId = resp.data.orderId
+            this.showModal = true
+          } else {
+            router.push({path: '/success', query: {token: this.$route.query.token, orderId: resp.data.orderId}})
+          }
         }).catch((res) => {
           console.log(res)
         })

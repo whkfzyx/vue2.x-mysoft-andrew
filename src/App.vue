@@ -13,7 +13,7 @@
           <span class="icon iconfont icon-lingwuzhongxin_ icon-20 tab-color"
                 slot="icon-active"></span>
           <span class="tab-color"
-                slot="label">购物中心</span>
+                slot="label">物品列表</span>
         </tabbar-item>
         <tabbar-item :link="{path:'/about-me',query: {token: this.$route.query.token,page:1,pageSize:20}}"
                      :selected="$route.name === 'about-me'">

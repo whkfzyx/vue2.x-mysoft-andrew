@@ -3,6 +3,6 @@
  */
 
 export default {
-  API_SERVER: 'http://local.wechattest.com/andrew/api/',
-  LOGIN_PAGE: 'http://local.wechattest.com/wechat/oauth/qy_oauth_callback?uid=bolin'
+  API_SERVER: 'http://10.5.103.62/andrew/api/',
+  LOGIN_PAGE: 'http://10.5.103.62/wechat/oauth/qy_oauth_callback?uid=bolin'
 }

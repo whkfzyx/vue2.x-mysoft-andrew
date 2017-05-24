@@ -6,14 +6,13 @@
     </div>
 
     <!--msg-->
-    <div class="title">领取成功</div>
-    <div class="tips">要记得按时归还哦～</div>
+    <div class="tips" v-if="this.$route.query.need_return">要记得按时归还哦～</div>
 
     <div class="btns">
       <router-link :to="{path:'/order-detail',query:{token:this.$route.query.token,orderId:this.$route.query.orderId}}">
         <x-button type="primary" action-type="button">确定</x-button>
       </router-link>
-      <router-link :to="{path:'/'}" class="back">
+      <router-link :to="{path:'/', query:{token:this.$route.query.token}}" class="back">
         <x-button action-type="button">返回物品列表</x-button>
       </router-link>
     </div>
@@ -34,10 +33,6 @@
 <style lang="less" scoped>
   .order-success {
     text-align: center;
-    .title {
-      font-size: 30px;
-      color: #000;
-    }
     .tips {
       font-size: 20px;
       color: #555;

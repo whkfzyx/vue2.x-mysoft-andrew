@@ -15,20 +15,15 @@
 </template>
 
 <script>
-  import {
-    FormPreview,
-    dateFormat
-  } from 'vux'
+  import { FormPreview } from 'vux'
   import fetch from '../utils/fetch'
   import config from '../utils/config'
   import router from '../router'
+  import moment from 'moment'
 
   export default {
     name: 'orderDetail',
-    components: {
-      FormPreview,
-      dateFormat
-    },
+    components: {FormPreview},
     data () {
       return {
         list: [],
@@ -56,11 +51,11 @@
           })
           this.list.push({
             label: '领取时间',
-            value: dateFormat(d.date, 'YYYY-MM-DD HH:mm:ss')
+            value: moment(parseInt(d.date) * 1000).format('YYYY-MM-DD HH:mm:ss')
           })
           this.list.push({
             label: '应还时间',
-            value: dateFormat(d.shouldReturnDate, 'YYYY-MM-DD HH:mm:ss')
+            value: moment(parseInt(d.shouldReturnDate) * 1000).format('YYYY-MM-DD HH:mm:ss')
           })
           this.list.push({
             label: '领取流水',

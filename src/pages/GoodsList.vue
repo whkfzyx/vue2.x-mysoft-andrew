@@ -24,15 +24,14 @@
   export default {
     data () {
       return {
-        typeList: [],
-        test: '123'
+        typeList: []
       }
     },
     // 请求数据
-    mounted: function () {
+    created: function () {
       let me = this
       fetch({
-        url: config.API_SERVER + 'getgoodslist?token=831d0iP_myy_QsLmEAt8baiAWjhex4LyYi_myy_LkjZrRxQRbeeSrQ'
+        url: config.API_SERVER + 'getgoodslist?token=' + this.$route.query.token
       }).then((result) => {
         me.typeList = result.data.typelist
       }).catch(function (ex) {

@@ -4,41 +4,36 @@
     <group gutter="0">
       <cell v-for="order in list"
             :title="order.name"
-            :inline-desc="getLyDateString(order.date)"
+            :inline-desc="getDateString(order)"
             :key="order.orderId"
             :link="getGoodDtlPath(order)"
+            class="order-item"
             is-link>
-
-        <label v-if="order.assetSN">产品编号:{{order.assetSN}}</label>
-        <!--<label>已还时间:{{order.returnDate}}</label>-->
-        <br/>
-        <label v-if="order.returnDate">已还时间:{{getDateString(order.returnDate)}}</label>
-        <label v-else-if="order.shouldReturnDate">应还时间:{{getDateString(order.shouldReturnDate)}}</label>
-
+        <div class="overdue-badge" v-if="order.overTime"><img src="../assets/overdue.png"></div>
       </cell>
     </group>
-    <!--<load-more tip="正在加载"></load-more>-->
+
+    <load-more :tip="'正在加载'" :show-loading="false"></load-more>
   </div>
 </template>
 
 <script>
-  import { Group, Cell, LoadMore, dateFormat } from 'vux'
+  import { Group, Cell, LoadMore } from 'vux'
   import fetch from '../utils/fetch'
   import config from '../utils/config'
+  import moment from 'moment'
 
   export default {
+    name: 'AboutMe',
     data () {
       return {
-        list: [],
-        test: '123'
+        list: []
       }
     },
-    name: 'AboutMe',
     components: {
       Group,
       Cell,
-      LoadMore,
-      dateFormat
+      LoadMore
     },
     // 请求数据
     created: function () {
@@ -52,36 +47,41 @@
       })
     },
     methods: {
-      onItemClick (goodListItem) {
-        this.$router.push({path: '/order-detail', query: {goodsId: ''}})
-      },
-      getImgPath (path) {
-        return '../mock' + path
-      },
       getGoodDtlPath (goodListItem) {
         return {path: '/order-detail', query: {orderId: goodListItem.orderId, token: this.$route.query.token}}
       },
-      getDateString (iDate) {
-        let myDate = new Date(iDate)
-        let myYear = myDate.getFullYear()
-        let myMonth = myDate.getMonth() + 1
-        let myDay = myDate.getDate()
-        let myMonthStr = myMonth < 10 ? ('0' + myMonth) : (myMonth + '')
-        let myDayStr = myDay < 10 ? ('0' + myDay) : (myDay + '')
-        let result = myYear + '-' + myMonthStr + '-' + myDayStr
-        return result
-      },
-      getLyDateString (iDate) {
-        let result = ''
-        result = this.getDateString(iDate)
-        result = '领用时间:' + result
-        return result
+      getDateString (item) {
+        let str = ''
+        if (item.overTime === 1 && item.returnDate === '0') {
+          str = '应还时间：' + moment(parseInt(item.shouldReturnDate) * 1000).format('YYYY-MM-DD')
+        } else if (item.overTime === 0 && item.returnDate !== '0') {
+          str = '归还时间：' + moment(parseInt(item.returnDate) * 1000).format('YYYY-MM-DD')
+        } else {
+          str = '领用时间: ' + moment(parseInt(item.date) * 1000).format('YYYY-MM-DD')
+        }
+
+        return str
       }
     }
   }
 </script>
-<style scoped lange="less">
+<style scoped lang="less">
   .my-borrow-list {
+    .order-item {
+      position: relative;
+      overflow: hidden;
+      .overdue-badge {
+        width: 80px;
+        height: auto;
+        position: absolute;
+        bottom: -55px;
+        right: 20px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
   }
 
   .cell-icon {
