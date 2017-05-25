@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import AboutMe from '@/pages/AboutMe'
-import BorrowForm from '@/pages/BorrowForm'
-import GetForm from '@/pages/GetForm'
+import OrderDetail from '@/pages/OrderDetail'
 import GoodsDetail from '@/pages/GoodsDetail'
 import GoodsList from '@/pages/GoodsList'
 import Success from '@/pages/Success'
@@ -10,6 +9,7 @@ import Success from '@/pages/Success'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -20,14 +20,9 @@ export default new Router({
       }
     },
     {
-      path: '/borrow-form',
-      name: 'borrow-form',
-      component: BorrowForm
-    },
-    {
-      path: '/get-form',
-      name: 'get-form',
-      component: GetForm
+      path: '/order-detail',
+      name: 'order-detail',
+      component: OrderDetail
     },
     {
       path: '/goods-detail',
