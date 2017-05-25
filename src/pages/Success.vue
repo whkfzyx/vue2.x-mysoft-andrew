@@ -10,10 +10,10 @@
 
     <div class="btns">
       <router-link :to="{path:'/order-detail',query:{token:this.$route.query.token,orderId:this.$route.query.orderId}}">
-        <x-button type="primary" action-type="button">确定</x-button>
+        <x-button type="primary" action-type="button">查看详情</x-button>
       </router-link>
       <router-link :to="{path:'/', query:{token:this.$route.query.token}}" class="back">
-        <x-button action-type="button">返回物品列表</x-button>
+        <x-button action-type="button">继续领物</x-button>
       </router-link>
     </div>
   </div>

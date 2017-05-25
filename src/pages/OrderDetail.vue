@@ -31,7 +31,7 @@
           style: 'primary',
           text: '确定',
           onButtonClick: (name) => {
-            router.push({path: '/about-me', query: {token: this.$route.query.token}})
+            router.push({path: '/', query: {token: this.$route.query.token}})
           }
         }]
       }

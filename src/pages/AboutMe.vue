@@ -62,10 +62,12 @@
       },
       getDateString (item) {
         let str = ''
-        if (item.overTime === 1 && item.returnDate === '0') {
+        if (item.overTime === 1) {
           str = '应还时间：' + moment(parseInt(item.shouldReturnDate) * 1000).format('YYYY-MM-DD')
         } else if (item.overTime === 0 && item.returnDate !== '0') {
           str = '归还时间：' + moment(parseInt(item.returnDate) * 1000).format('YYYY-MM-DD')
+        } else if (item.overTime === 0 && item.returnDate === '0') {
+          str = '归还时间：长期'
         } else {
           str = '领用时间: ' + moment(parseInt(item.date) * 1000).format('YYYY-MM-DD')
         }
