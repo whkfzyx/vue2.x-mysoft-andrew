@@ -7,7 +7,7 @@
         <grid-item v-for="goodListItem in typeListItem.list" :key="goodListItem.goodsId"
                    :link="getGoodDtlPath(goodListItem)" class="grid-item">
           <div class="custom-img">
-            <img :src="goodListItem.img">
+            <img v-if="goodListItem.img" :src="goodListItem.img">
           </div>
           <div class="custom-label">{{goodListItem.name}}</div>
         </grid-item>
@@ -65,6 +65,8 @@
           position: relative;
           width: 100%;
           padding-top: 74.66%;
+          background-image: url(../assets/default-bg-small.png);
+          background-size: contain;
           img {
             position: absolute;
             left: 0;
