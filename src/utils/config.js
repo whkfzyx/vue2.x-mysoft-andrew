@@ -3,6 +3,6 @@
  */
 
 export default {
-  API_SERVER: 'http://10.5.103.62/andrew/api/',
-  LOGIN_PAGE: 'http://10.5.103.62/wechat/oauth/qy_oauth_callback?uid=bolin'
+  API_SERVER: 'http://119.23.216.222:80/andrew/api/',
+  LOGIN_PAGE: 'http://119.23.216.222:80/wechat/oauth/qy_oauth'
 }
