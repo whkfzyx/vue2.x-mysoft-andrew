@@ -44,28 +44,32 @@
     },
     methods: {
       fetchPage () {
-        fetch({
-          url: config.API_SERVER + 'getmyborrowlist?page=' + (this.currentPage || this.$route.query.page || 1) + '&pageSize=' + (this.$route.query.pageSize || 20) + '&token=' + this.$route.query.token
-        }).then((result) => {
-          this.list = this.list.concat(result.data.list)
-          if ((parseInt(result.data.count) + 20 - 1) / 20 < this.currentPage) {
-            this.currentPage += 1
-          } else {
-            this.reachLastPage = true
-          }
-        }).catch(function (ex) {
-          console.log(ex)
-        })
+        if (!this.reachLastPage) {
+          fetch({
+            url: config.API_SERVER + 'getmyborrowlist?page=' + (this.currentPage || this.$route.query.page || 1) + '&pageSize=' + (this.$route.query.pageSize || 20) + '&token=' + this.$route.query.token
+          }).then((result) => {
+            this.list = this.list.concat(result.data.list)
+            if (this.currentPage <= (parseInt(result.data.count) + 20 - 1) / 20) {
+              this.currentPage += 1
+            } else {
+              this.reachLastPage = true
+            }
+          }).catch(function (ex) {
+            console.log(ex)
+          })
+        }
       },
       getGoodDtlPath (goodListItem) {
         return {path: '/order-detail', query: {orderId: goodListItem.orderId, token: this.$route.query.token}}
       },
       getDateString (item) {
         let str = ''
-        if (item.overTime === 1 && item.returnDate === '0') {
+        if (item.overTime === 1) {
           str = '应还时间：' + moment(parseInt(item.shouldReturnDate) * 1000).format('YYYY-MM-DD')
         } else if (item.overTime === 0 && item.returnDate !== '0') {
           str = '归还时间：' + moment(parseInt(item.returnDate) * 1000).format('YYYY-MM-DD')
+        } else if (item.overTime === 0 && item.returnDate === '0') {
+          str = '归还时间：长期'
         } else {
           str = '领用时间: ' + moment(parseInt(item.date) * 1000).format('YYYY-MM-DD')
         }
