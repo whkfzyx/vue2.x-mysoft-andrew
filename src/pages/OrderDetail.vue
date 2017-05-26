@@ -8,8 +8,7 @@
 
     <form-preview header-label="产品名称"
                   :header-value="orderInfo.name"
-                  :body-items="list"
-                  :footer-buttons="btnconfirm"></form-preview>
+                  :body-items="list"></form-preview>
   </div>
 </template>
 
@@ -26,14 +25,7 @@
     data () {
       return {
         list: [],
-        orderInfo: {},
-        btnconfirm: [{
-          style: 'primary',
-          text: '确定',
-          onButtonClick: (name) => {
-            router.push({path: '/', query: {token: this.$route.query.token}})
-          }
-        }]
+        orderInfo: {}
       }
     },
     methods: {

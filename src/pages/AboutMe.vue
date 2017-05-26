@@ -44,18 +44,20 @@
     },
     methods: {
       fetchPage () {
-        fetch({
-          url: config.API_SERVER + 'getmyborrowlist?page=' + (this.currentPage || this.$route.query.page || 1) + '&pageSize=' + (this.$route.query.pageSize || 20) + '&token=' + this.$route.query.token
-        }).then((result) => {
-          this.list = this.list.concat(result.data.list)
-          if ((parseInt(result.data.count) + 20 - 1) / 20 < this.currentPage) {
-            this.currentPage += 1
-          } else {
-            this.reachLastPage = true
-          }
-        }).catch(function (ex) {
-          console.log(ex)
-        })
+        if (!this.reachLastPage) {
+          fetch({
+            url: config.API_SERVER + 'getmyborrowlist?page=' + (this.currentPage || this.$route.query.page || 1) + '&pageSize=' + (this.$route.query.pageSize || 20) + '&token=' + this.$route.query.token
+          }).then((result) => {
+            this.list = this.list.concat(result.data.list)
+            if (this.currentPage <= (parseInt(result.data.count) + 20 - 1) / 20) {
+              this.currentPage += 1
+            } else {
+              this.reachLastPage = true
+            }
+          }).catch(function (ex) {
+            console.log(ex)
+          })
+        }
       },
       getGoodDtlPath (goodListItem) {
         return {path: '/order-detail', query: {orderId: goodListItem.orderId, token: this.$route.query.token}}
