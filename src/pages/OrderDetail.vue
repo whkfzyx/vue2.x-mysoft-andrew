@@ -16,7 +16,6 @@
   import { FormPreview } from 'vux'
   import fetch from '../utils/fetch'
   import config from '../utils/config'
-  import router from '../router'
   import moment from 'moment'
 
   export default {
