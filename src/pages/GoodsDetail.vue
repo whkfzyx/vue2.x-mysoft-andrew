@@ -68,7 +68,7 @@
 </template>
 
 <script>
-  import { Grid, GridItem, GroupTitle, XNumber, XButton, XDialog, dateFormat, XInput, Cell, Group } from 'vux'
+  import { XNumber, XButton, XDialog, dateFormat, XInput, Cell, Group } from 'vux'
   import fetch from '../utils/fetch'
   import config from '../utils/config'
   import router from '../router'
@@ -76,9 +76,6 @@
   export default {
     name: 'goodsDetail',
     components: {
-      Grid,
-      GridItem,
-      GroupTitle,
       XNumber,
       XButton,
       XDialog,
@@ -183,6 +180,7 @@
       .btn-cancel {
         display: block;
         margin-top: 10px;
+        margin-bottom: 20px;
       }
     }
     .dialog {
