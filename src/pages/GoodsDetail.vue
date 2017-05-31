@@ -58,7 +58,8 @@
       </div>
 
       <div class="get">
-        <router-link :to="{path: '/success', query: {token: this.$route.query.token, orderId: orderId}}">
+        <router-link
+          :to="{path: '/success', query: {token: this.$route.query.token, orderId: orderId, need_return: this.goodsInfo.need_return}}">
           <div class="get-btn">我知道啦</div>
         </router-link>
       </div>
@@ -127,7 +128,14 @@
               this.orderId = resp.data.orderId
               this.showModal = true
             } else {
-              router.push({path: '/success', query: {token: this.$route.query.token, orderId: resp.data.orderId}})
+              router.push({
+                path: '/success',
+                query: {
+                  token: this.$route.query.token,
+                  orderId: resp.data.orderId,
+                  need_return: this.goodsInfo.need_return
+                }
+              })
             }
           }).catch((res) => {
             console.log(res)

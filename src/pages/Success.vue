@@ -6,7 +6,7 @@
     </div>
 
     <!--msg-->
-    <div class="tips" v-if="this.$route.query.need_return">要记得按时归还哦～</div>
+    <div class="tips" v-if="this.$route.query.need_return==='1'">要记得按时归还哦～</div>
 
     <div class="btns">
       <router-link :to="{path:'/order-detail',query:{token:this.$route.query.token,orderId:this.$route.query.orderId}}">
@@ -32,10 +32,21 @@
 
 <style lang="less" scoped>
   .order-success {
+    height: 100%;
+    background-color: #fff;
     text-align: center;
+    .top-img {
+      text-align: center;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      img {
+        width: 60%;
+        height: auto;
+      }
+    }
     .tips {
-      font-size: 20px;
-      color: #555;
+      font-size: 16px;
+      color: #888;
     }
     .btns {
       margin: 20px 20px 0 20px;

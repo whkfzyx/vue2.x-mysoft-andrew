@@ -67,11 +67,11 @@
             value: moment(parseInt(d.shouldReturnDate) * 1000).format('YYYY-MM-DD HH:mm:ss')
           })
           this.list.push({
-            label: '领取流水',
+            label: '流水号',
             value: d.orderId
           })
           this.list.push({
-            label: '产品编号',
+            label: '资产编号',
             value: d.assetSN
           })
           this.list.push({

@@ -1,30 +1,31 @@
 <!--我的领用记录列表-->
 <template>
-  <div class="my-borrow-list">
-    <group gutter="0">
-      <cell v-for="order in list"
-            :title="order.name"
-            :inline-desc="getDateString(order)"
-            :key="order.orderId"
-            :link="getGoodDtlPath(order)"
-            class="order-item"
-            is-link>
+  <div class="my-borrow-list" ref="wrap">
+    <ul class="list-group">
+      <li class="order-item" v-for="order in list" :key="order.orderId"
+          @click="getGoodDtlPath(order)">
+        <div class="row1">
+          <div class="title">{{order.name}}</div>
+          <div class="sn" v-if="order.assetSn">资产编号：{{order.assetSn}}</div>
+        </div>
+        <div class="date">{{getDateString(order)}}</div>
         <div class="overdue-badge" v-if="order.overTime"><img src="../assets/overdue.png"></div>
-      </cell>
-    </group>
+        <i class="arrow"></i>
+      </li>
+    </ul>
 
-    <mugen-scroll :handler="fetchData" :should-handle="!loadingPage">
-      <load-more :tip="reachLastPage?'没有更多了':'正在加载'" :show-loading="false"></load-more>
+    <mugen-scroll :handler="fetchPage" :should-handle="!loadingPage" scroll-container="wrap">
+      <div class="load-more-tips">{{reachLastPage ? '没有更多了' : '正在加载'}}</div>
     </mugen-scroll>
   </div>
 </template>
 
 <script>
-  import { Group, Cell, LoadMore } from 'vux'
   import fetch from '../utils/fetch'
   import config from '../utils/config'
   import moment from 'moment'
   import MugenScroll from 'vue-mugen-scroll'
+  import router from '../router'
 
   export default {
     name: 'AboutMe',
@@ -37,30 +38,31 @@
       }
     },
     components: {
-      Group,
-      Cell,
-      LoadMore,
       MugenScroll
     },
     methods: {
       fetchPage () {
         if (!this.reachLastPage) {
+          this.loadingPage = true
           fetch({
             url: config.API_SERVER + 'getmyborrowlist?page=' + (this.currentPage || this.$route.query.page || 1) + '&pageSize=' + (this.$route.query.pageSize || 20) + '&token=' + this.$route.query.token
           }).then((result) => {
             this.list = this.list.concat(result.data.list)
-            if (this.currentPage <= (parseInt(result.data.count) + 20 - 1) / 20) {
+            this.loadingPage = false
+            let maxPage = Math.floor((parseInt(result.data.count) + 20 - 1) / 20)
+            if (this.currentPage < maxPage) {
               this.currentPage += 1
             } else {
               this.reachLastPage = true
             }
           }).catch(function (ex) {
+            this.loadingPage = false
             console.log(ex)
           })
         }
       },
       getGoodDtlPath (goodListItem) {
-        return {path: '/order-detail', query: {orderId: goodListItem.orderId, token: this.$route.query.token}}
+        router.push({path: '/order-detail', query: {orderId: goodListItem.orderId, token: this.$route.query.token}})
       },
       getDateString (item) {
         let str = ''
@@ -75,53 +77,83 @@
         }
 
         return str
-      },
-      fetchData () {
-        this.loadingPage = true
-        this.fetchPage()
-        this.loadingPage = false
       }
     }
   }
 </script>
+
 <style scoped lang="less">
   .my-borrow-list {
-    .order-item {
-      position: relative;
-      overflow: hidden;
-      .overdue-badge {
-        width: 80px;
-        height: auto;
-        position: absolute;
-        bottom: -55px;
-        right: 20px;
-        img {
-          width: 100%;
-          height: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    ul.list-group {
+      list-style: none;
+      background-color: #efeff4;
+      li.order-item {
+        padding: 8px 14px;
+        background-color: #fff;
+        display: block;
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, .1);
+        margin: 10px 10px 0 10px;
+        .row1 {
+          &:after {
+            display: block;
+            clear: both;
+            height: 0;
+            visibility: hidden;
+            content: '.';
+          }
+          .title, .sn {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            float: left;
+            width: 50%;
+          }
+          .title {
+            color: #000;
+            font-size: 18px;
+          }
+          .sn {
+            color: #888;
+            font-size: 10px;
+            line-height: 28px;
+          }
+        }
+        .date {
+          color: #888;
+          font-size: 14px;
+        }
+        .overdue-badge {
+          width: 80px;
+          height: auto;
+          position: absolute;
+          top: 8px;
+          right: 30px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        i.arrow {
+          position: absolute;
+          right: 8px;
+          top: 26px;
+          background-image: url(../assets/arrow.png);
+          display: block;
+          width: 16px;
+          height: 16px;
         }
       }
     }
-  }
-
-  .cell-icon {
-    height: 64px;
-    width: 64px;
-    margin-right: 13px;
-    background-color: #eee;
-  }
-
-  .div-row {
-    width: 100%;
-    float: left;
-  }
-
-  .div-left {
-    width: 50%;
-    float: left;
-  }
-
-  .div-right {
-    width: 50%;
-    float: right;
+    .load-more-tips {
+      text-align: center;
+      margin: 20px;
+      color: #999;
+      font-size: 14px;
+    }
   }
 </style>

@@ -54,6 +54,7 @@
 <style scoped lang="less">
   .good-list {
     background-color: #fff;
+    height: 100%;
     .grid-list {
       & + .grid-list {
         margin: 20px 0 0 0;
