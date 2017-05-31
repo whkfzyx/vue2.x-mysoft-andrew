@@ -6,32 +6,27 @@
       <img v-if="goodsInfo.img" :src="goodsInfo.img" :alt="goodsInfo.name">
     </div>
 
-    <!--info 需要归还物品信息-->
+    <!--info 无需要归还物品信息-->
     <div class="info" v-if="goodsInfo.need_return===0">
-      <group-title>最高领用频率</group-title>
-      <div class="info-item">
-        <div class="main">{{goodsInfo.frequency}}/人·月</div>
-        <div class="sub">（本周期内已领 <span class="num">{{goodsInfo.alreadyHave}}</span>）</div>
-      </div>
-
-      <group-title>领用数量</group-title>
-      <div class="info-item">
-        <x-number :title="''" :value="0" :min="0" :max="parseInt(goodsInfo.stock)" v-model="form.num"></x-number>
-        <div class="sub form-height">（库存剩余 <span class="num">{{goodsInfo.stock}}</span>）</div>
-      </div>
+      <group gutter="10px">
+        <cell :title="'物品名称'" :value="goodsInfo.name"></cell>
+        <cell :title="'最高领用频率'" :value="goodsInfo.frequency+'/人·月'"></cell>
+        <cell :title="'本月已领'" :value="goodsInfo.alreadyHave"></cell>
+        <x-number :title="'领用数量'" :value="0" :min="0" :max="parseInt(goodsInfo.stock)" v-model="form.num"></x-number>
+        <cell :title="'库存剩余'" :value="goodsInfo.stock"></cell>
+      </group>
     </div>
-    <!--无需归还物品信息-->
-    <div class="info" v-else>
-      <group-title>固定资产编号</group-title>
-      <div class="info-item">
-        <x-input title="" v-model="form.assetSn" class="input"></x-input>
-      </div>
 
-      <group-title>领用说明</group-title>
-      <div class="info-item">
-        <div class="sub">领用时长 <span class="num">{{goodsInfo.alreadyHave}}</span>，库存剩余 <span
-          class="num">{{goodsInfo.stock}}</span>。
-        </div>
+    <!--需归还物品信息-->
+    <div class="info" v-else>
+      <group gutter="10px">
+        <cell :title="'物品名称'" :value="goodsInfo.name"></cell>
+        <cell :title="'领用时长'" :value="(parseInt(goodsInfo.duration)/86400).toFixed(1)+' 天'"></cell>
+        <x-input :title="'固定资产编号'" placeholder="（填写编号）" v-model="form.assetSn" class="input"></x-input>
+        <cell :title="'库存剩余'" :value="goodsInfo.stock"></cell>
+      </group>
+      <div class="desc" v-if="goodsInfo.description">
+        {{goodsInfo.description}}
       </div>
     </div>
 
@@ -40,7 +35,7 @@
       <x-button type="primary" v-if="!goodsInfo.stock" disabled>无库存</x-button>
       <x-button type="primary" v-else-if="!goodsInfo.need_return&&form.num<=0" disabled>请输入领用数</x-button>
       <x-button type="primary" v-else @click.native="onSubmit">领取</x-button>
-      <router-link to="/" class="btn-cancel">
+      <router-link :to="{path: '/', query: {token: this.$route.query.token}}" class="btn-cancel">
         <x-button>取消</x-button>
       </router-link>
     </div>
@@ -72,7 +67,7 @@
 </template>
 
 <script>
-  import { Grid, GridItem, GroupTitle, XNumber, XButton, XDialog, dateFormat, XInput } from 'vux'
+  import { Grid, GridItem, GroupTitle, XNumber, XButton, XDialog, dateFormat, XInput, Cell, Group } from 'vux'
   import fetch from '../utils/fetch'
   import config from '../utils/config'
   import router from '../router'
@@ -87,7 +82,9 @@
       XButton,
       XDialog,
       dateFormat,
-      XInput
+      XInput,
+      Cell,
+      Group
     },
     data () {
       return {
@@ -113,21 +110,29 @@
     },
     methods: {
       onSubmit () {
-        fetch({
-          url: config.API_SERVER + 'submitborrow?&token=' + this.$route.query.token,
-          method: 'POST',
-          data: {...this.form, goodsId: this.$route.query.goodsId}
-        }).then((resp) => {
-          if (resp.data.alreadyHave > parseInt(this.goodsInfo.frequency)) {
-            this.alreadyHave = resp.data.alreadyHave
-            this.orderId = resp.data.orderId
-            this.showModal = true
-          } else {
-            router.push({path: '/success', query: {token: this.$route.query.token, orderId: resp.data.orderId}})
-          }
-        }).catch((res) => {
-          console.log(res)
-        })
+        let patt = new RegExp('^[a-zA-Z]+[0-9]+$')
+        if (this.form.assetSn && !patt.test(this.form.assetSn)) {
+          this.$vux.alert.show({
+            title: '验证',
+            content: '固定资产编号必须字母开头，数字结尾'
+          })
+        } else {
+          fetch({
+            url: config.API_SERVER + 'submitborrow?&token=' + this.$route.query.token,
+            method: 'POST',
+            data: {...this.form, goodsId: this.$route.query.goodsId}
+          }).then((resp) => {
+            if ((resp.data.alreadyHave > parseInt(this.goodsInfo.frequency)) && this.goodsInfo.need_return === 0) {
+              this.alreadyHave = resp.data.alreadyHave
+              this.orderId = resp.data.orderId
+              this.showModal = true
+            } else {
+              router.push({path: '/success', query: {token: this.$route.query.token, orderId: resp.data.orderId}})
+            }
+          }).catch((res) => {
+            console.log(res)
+          })
+        }
       },
       loadDetail () {
         fetch({
@@ -159,33 +164,10 @@
       }
     }
     .info {
-      .info-item {
-        margin: 0 20px;
-        > div {
-          display: inline-block;
-          &.main {
-            font-size: 24px;
-            font-weight: bold;
-            color: #000;
-          }
-          &.sub {
-            font-size: 18px;
-            color: #555;
-          }
-          &.form-height {
-            vertical-align: top;
-            line-height: 48px;
-          }
-          &.input {
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            display: flex;
-            width: 60%;
-          }
-          .num {
-            color: #1492d5;
-          }
-        }
+      .desc {
+        margin: 10px 15px;
+        color: #999;
+        font-size: 14px;
       }
     }
     .btns {

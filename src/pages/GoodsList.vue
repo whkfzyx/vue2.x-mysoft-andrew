@@ -18,113 +18,25 @@
 
 <script>
   import { Grid, GridItem, GroupTitle } from 'vux'
+  import fetch from '../utils/fetch'
+  import config from '../utils/config'
 
   export default {
     data () {
       return {
-        typeList: [
-          {
-            typeId: '1',
-            key: 'lowValue',
-            value: '低值消耗',
-            list: [
-              {
-                goodsId: '44234-634234-734641',
-                name: '纸巾',
-                img: '/image/pic1.png'
-              },
-              {
-                goodsId: '24234-634234-734642',
-                name: '中性笔',
-                img: '/image/pic2.png'
-              },
-              {
-                goodsId: '94234-634234-734643',
-                name: '草稿本',
-                img: '/image/pic3.png'
-              },
-
-              {
-                goodsId: '44234-634234-734645',
-                name: '马克笔',
-                img: '/image/pic8.png'
-              },
-              {
-                goodsId: '44234-634234-734645',
-                name: '透明胶带',
-                img: '/image/pic9.png'
-              },
-              {
-                goodsId: '44234-634234-734645',
-                name: '剪刀',
-                img: '/image/pic10.png'
-              },
-              {
-                goodsId: '44234-634234-734645',
-                name: '文件夹',
-                img: '/image/pic11.png'
-              },
-              {
-                goodsId: '44234-634234-734645',
-                name: '便利贴',
-                img: '/image/pic13.png'
-              }
-            ]
-          },
-          {
-            typeId: '2',
-            key: 'fixedAsset',
-            value: '固定资产',
-            list: [
-              {
-                goodsId: '44234-634234-734646',
-                name: '笔记本电脑',
-                img: '/image/pic14.png'
-              },
-              {
-                goodsId: '44234-634234-734645',
-                name: '订书机',
-                img: '/image/pic12.png'
-              },
-              {
-                goodsId: '44234-634234-734646',
-                name: '笔记本电脑',
-                img: '/image/pic14.png'
-              },
-              {
-                goodsId: '44234-634234-734645',
-                name: '订书机',
-                img: '/image/pic12.png'
-              }
-            ]
-          },
-          {
-            typeId: '3',
-            key: 'loveHouse',
-            value: '爱心屋',
-            list: [
-              {
-                goodsId: '44234-634234-734649',
-                name: '雨伞',
-                img: '/image/pic16.jpg'
-              },
-              {
-                goodsId: '24234-634234-734650',
-                name: '充电宝',
-                img: '/image/pic15.jpg'
-              },
-              {
-                goodsId: '94234-634234-734651',
-                name: '热水袋',
-                img: '/image/pic17.jpg'
-              }
-            ]
-          }
-        ]
+        typeList: []
       }
     },
     // 请求数据
     created: function () {
+      let me = this
+      fetch({
+        url: config.API_SERVER + 'getgoodslist?token=' + this.$route.query.token
+      }).then((result) => {
+        me.typeList = result.data.typelist
+      }).catch(function (ex) {
+        console.log(ex)
+      })
     },
     components: {
       Grid,
@@ -141,6 +53,7 @@
 
 <style scoped lang="less">
   .good-list {
+    background-color: #fff;
     .grid-list {
       & + .grid-list {
         margin: 20px 0 0 0;

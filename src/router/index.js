@@ -16,30 +16,41 @@ export default new Router({
       name: 'index',
       component: GoodsList,
       meta: {
-        tab: true
+        tab: true,
+        title: '物品领用'
       }
     },
     {
       path: '/order-detail',
       name: 'order-detail',
-      component: OrderDetail
+      component: OrderDetail,
+      meta: {
+        title: '流水详情'
+      }
     },
     {
       path: '/goods-detail',
       name: 'goods-detail',
-      component: GoodsDetail
+      component: GoodsDetail,
+      meta: {
+        title: '物品详情'
+      }
     },
     {
       path: '/success',
       name: 'success',
-      component: Success
+      component: Success,
+      meta: {
+        title: '领取成功'
+      }
     },
     {
       path: '/about-me',
       name: 'about-me',
       component: AboutMe,
       meta: {
-        tab: true
+        tab: true,
+        title: '我的领取'
       }
     }
   ]

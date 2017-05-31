@@ -47,7 +47,7 @@
   @import './assets/less/iconfont.less';
 
   body {
-    background-color: #fff;
+    background-color: #efeff4;
     user-select: none;
   }
 
@@ -68,5 +68,17 @@
 
   .weui-bar__item_on .tab-color {
     color: #4683C5;
+  }
+
+  .weui-btn.weui-btn_primary {
+    background-color: #4382c7;
+  }
+
+  .weui-btn.weui-btn_disabled.weui-btn_primary {
+    background-color: lighten(#4382c7, 20%);
+  }
+
+  .vux-number-selector svg {
+    fill: #4382c7 !important;
   }
 </style>

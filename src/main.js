@@ -3,6 +3,7 @@ import FastClick from 'fastclick'
 import VueRouter from 'vue-router'
 import App from './App'
 import router from './router'
+import VueRouterTitle from 'vue-router-title'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,7 @@ Vue.use(LoadingPlugin)
 Vue.use(WechatPlugin)
 Vue.use(AjaxPlugin)
 Vue.use(LocalePlugin)
+Vue.use(VueRouterTitle, {router})
 
 FastClick.attach(document.body)
 
