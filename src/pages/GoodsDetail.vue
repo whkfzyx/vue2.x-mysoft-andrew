@@ -12,7 +12,8 @@
         <cell :title="'物品名称'" :value="goodsInfo.name"></cell>
         <cell :title="'最高领用频率'" :value="goodsInfo.frequency+'/人·月'"></cell>
         <cell :title="'本月已领'" :value="goodsInfo.alreadyHave"></cell>
-        <x-number :title="'领用数量'" :value="0" :min="0" :max="parseInt(goodsInfo.stock)" v-model="form.num"></x-number>
+        <x-number :title="'领用数量'" :fillable="true" :min="1" :max="parseInt(goodsInfo.stock)"
+                  v-model="form.num"></x-number>
         <cell :title="'库存剩余'" :value="goodsInfo.stock"></cell>
       </group>
     </div>
