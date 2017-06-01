@@ -4,11 +4,13 @@
     <!--top image-->
     <div class="top-img">
       <img v-if="orderInfo.img" :src="orderInfo.img" :alt="orderInfo.name">
+      <div class="overdue-badge" v-if="overTime"><img src="../assets/overdue.png"></div>
     </div>
 
     <form-preview header-label="产品名称"
                   :header-value="orderInfo.name"
-                  :body-items="list"></form-preview>
+                  :body-items="list">
+    </form-preview>
   </div>
 </template>
 
@@ -24,7 +26,8 @@
     data () {
       return {
         list: [],
-        orderInfo: {}
+        orderInfo: {},
+        overTime: false
       }
     },
     methods: {
@@ -47,6 +50,7 @@
                 value: '借用中'
               })
             } else {
+              this.overTime = true
               this.list.push({
                 label: '当前状态',
                 value: '已超期'
@@ -98,11 +102,24 @@
       background-size: contain;
       background-image: url(../assets/default-bg-img.png);
       img {
+        z-index: 1;
         position: absolute;
         top: 0;
         left: 0;
         height: 100%;
         width: 100%;
+      }
+      .overdue-badge {
+        z-index: 2;
+        width: 120px;
+        height: 120px;
+        position: absolute;
+        bottom: -40px;
+        right: 10px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   }
