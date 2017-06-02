@@ -3,6 +3,6 @@
  */
 
 export default {
-  API_SERVER: 'http://andrew.tunnel.qydev.com/andrew/api/',
-  LOGIN_PAGE: 'http://andrew.tunnel.qydev.com/wechat/oauth/qy_oauth'
+  API_SERVER: 'http://119.23.216.222:80/andrew/api/',
+  LOGIN_PAGE: 'http://119.23.216.222:80/wechat/oauth/qy_oauth'
 }
