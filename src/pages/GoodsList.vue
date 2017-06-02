@@ -55,6 +55,7 @@
   .good-list {
     background-color: #fff;
     height: 100%;
+    overflow-y: auto;
     .grid-list {
       & + .grid-list {
         margin: 20px 0 0 0;

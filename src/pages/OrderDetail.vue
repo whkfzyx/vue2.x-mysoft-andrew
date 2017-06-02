@@ -4,7 +4,7 @@
     <!--top image-->
     <div class="top-img">
       <img v-if="orderInfo.img" :src="orderInfo.img" :alt="orderInfo.name">
-      <div class="overdue-badge" v-if="overTime"><img src="../assets/overdue.png"></div>
+      <div class="overdue-badge" v-if="orderInfo.overTime"><img src="../assets/overdue.png"></div>
     </div>
 
     <form-preview header-label="产品名称"
@@ -27,7 +27,6 @@
       return {
         list: [],
         orderInfo: {},
-        overTime: false
       }
     },
     methods: {
@@ -38,38 +37,40 @@
           let d = res.data
           this.orderInfo = d
 
-          if (d.shouldReturnDate === '0') {
+          if (d.overTime === 1) {
             this.list.push({
               label: '当前状态',
-              value: '已结束'
+              value: '已超期'
             })
-          } else if (d.shouldReturnDate !== '0' && d.returnDate === '0') {
-            if (d.shouldReturnDate > moment(moment().format('YYYY-MM-DD')).format('X')) {
-              this.list.push({
-                label: '当前状态',
-                value: '借用中'
-              })
-            } else {
-              this.overTime = true
-              this.list.push({
-                label: '当前状态',
-                value: '已超期'
-              })
-            }
-          } else if (d.shouldReturnDate !== '0' && d.returnDate !== '0') {
+          } else if (d.needReturn == 1 && d.returnDate == 0) {
             this.list.push({
               label: '当前状态',
               value: '借用中'
             })
+          } else {
+            this.list.push({
+              label: '当前状态',
+              value: '已结束'
+            })
           }
+
           this.list.push({
             label: '领取时间',
             value: moment(parseInt(d.date) * 1000).format('YYYY-MM-DD HH:mm:ss')
           })
-          this.list.push({
-            label: '应还时间',
-            value: moment(parseInt(d.shouldReturnDate) * 1000).format('YYYY-MM-DD HH:mm:ss')
-          })
+          if (d.needReturn == 1) {
+            this.list.push({
+              label: '应还时间',
+              value: d.shouldReturnDate ? moment(parseInt(d.shouldReturnDate) * 1000).format('YYYY-MM-DD HH:mm:ss') : '长期'
+            })
+            if (d.returnDate) {
+              this.list.push({
+                label: '归还时间',
+                value: moment(parseInt(d.returnDate) * 1000).format('YYYY-MM-DD HH:mm:ss')
+              })
+            }
+          }
+
           this.list.push({
             label: '流水号',
             value: d.orderId
