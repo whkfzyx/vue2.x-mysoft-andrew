@@ -13,7 +13,7 @@
           <span class="icon iconfont icon-lingwuzhongxin_ icon-20 tab-color"
                 slot="icon-active"></span>
           <span class="tab-color"
-                slot="label">物品列表</span>
+                slot="label">领物中心</span>
         </tabbar-item>
         <tabbar-item :link="{path:'/about-me',query: {token: this.$route.query.token,page:1,pageSize:20}}"
                      :selected="$route.name === 'about-me'">
@@ -72,6 +72,9 @@
 
   .weui-btn.weui-btn_primary {
     background-color: #4382c7;
+    &:active {
+      background-color: #4382c7;
+    }
   }
 
   .weui-btn.weui-btn_disabled.weui-btn_primary {
@@ -94,5 +97,9 @@
 
   .weui-dialog {
     border-radius: 10px !important;
+  }
+
+  .vux-number-input {
+    font-size: 14px !important;
   }
 </style>

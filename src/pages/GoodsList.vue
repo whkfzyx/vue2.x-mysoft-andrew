@@ -33,7 +33,7 @@
       fetch({
         url: config.API_SERVER + 'getgoodslist?token=' + this.$route.query.token
       }).then((result) => {
-        me.typeList = result.data.typelist
+        me.typeList = result.data.typelist.reverse()
       }).catch(function (ex) {
         console.log(ex)
       })
