@@ -100,7 +100,7 @@
           stock: 0  // 库存
         },
         form: {num: 1, goodsId: '', assetSn: ''},
-        showModal: true,
+        showModal: false,
         alreadyHave: 0,
         orderId: ''
       }

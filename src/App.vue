@@ -82,8 +82,14 @@
     fill: #555 !important;
   }
 
-  .weui-tabbar:before {
-    border-top: 0 none !important;
+  .weui-tabbar {
+    .weui-tabbar__item {
+      background-color: #f7f7fa !important;
+      padding: 8px 0 0 !important;
+    }
+    &:before {
+      display: none !important;
+    }
   }
 
   .weui-dialog {
