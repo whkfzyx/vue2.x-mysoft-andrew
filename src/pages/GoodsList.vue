@@ -63,7 +63,7 @@
       .title {
         margin: 0;
         background-color: #efeff4;
-        padding: 6px 20px;
+        padding: 10px 20px;
       }
       .weui-grids {
         margin-left: 6px;
@@ -81,7 +81,7 @@
           border: 0 none;
         }
         .grid-item {
-          padding: 8px 4px;
+          padding: 10px;
           .custom-img {
             position: relative;
             width: 100%;
@@ -99,7 +99,7 @@
           .custom-label {
             text-align: center;
             color: #555;
-            font-size: 14px;
+            font-size: 12px;
             text-overflow: ellipsis;
             width: 100%;
             overflow: hidden;

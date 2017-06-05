@@ -42,7 +42,7 @@
               label: '当前状态',
               value: '已超期'
             })
-          } else if (d.needReturn == 1 && d.returnDate == 0) {
+          } else if (d.needReturn === 1 && d.returnDate === 0) {
             this.list.push({
               label: '当前状态',
               value: '借用中'
@@ -58,7 +58,7 @@
             label: '领取时间',
             value: moment(parseInt(d.date) * 1000).format('YYYY-MM-DD HH:mm:ss')
           })
-          if (d.needReturn == 1) {
+          if (d.needReturn === 1) {
             this.list.push({
               label: '应还时间',
               value: d.shouldReturnDate ? moment(parseInt(d.shouldReturnDate) * 1000).format('YYYY-MM-DD HH:mm:ss') : '长期'
@@ -94,8 +94,10 @@
   }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .order-detail {
+    background-color: #fff;
+    height: 100%;
     .top-img {
       position: relative;
       width: 100%;

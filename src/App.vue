@@ -79,6 +79,10 @@
   }
 
   .vux-number-selector svg {
-    fill: #4382c7 !important;
+    fill: #555 !important;
+  }
+
+  .weui-tabbar:before {
+    border-top: 0 none !important;
   }
 </style>

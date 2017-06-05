@@ -11,7 +11,7 @@
       <group gutter="10px">
         <cell :title="'物品名称'" :value="goodsInfo.name"></cell>
         <cell :title="'最高领用频率'" :value="goodsInfo.frequency+'/人·月'"></cell>
-        <cell :title="'本月已领'" :value="goodsInfo.alreadyHave"></cell>
+        <cell :title="'本月已领'" :value="goodsInfo.alreadyHave?goodsInfo.alreadyHave:'0'"></cell>
         <x-number :title="'领用数量'" :fillable="true" :min="1" :max="parseInt(goodsInfo.stock)"
                   v-model="form.num"></x-number>
         <cell :title="'库存剩余'" :value="goodsInfo.stock"></cell>
@@ -22,7 +22,8 @@
     <div class="info" v-else>
       <group gutter="10px">
         <cell :title="'物品名称'" :value="goodsInfo.name"></cell>
-        <cell :title="'领用时长'" :value="(parseInt(goodsInfo.duration)/86400).toFixed(1)+' 天'"></cell>
+        <cell :title="'领用时长'"
+              :value="goodsInfo.duration==0?'长期':((parseInt(goodsInfo.duration)/86400).toFixed(1)+' 天')"></cell>
         <x-input :title="'固定资产编号'" placeholder="（填写编号）" v-model="form.assetSn" class="input"></x-input>
         <cell :title="'库存剩余'" :value="goodsInfo.stock"></cell>
       </group>
