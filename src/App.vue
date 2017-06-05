@@ -118,4 +118,8 @@
   .vux-number-selector.vux-number-selector-plus {
     margin-right: 0 !important;
   }
+
+  .weui-grid:active {
+    background-color: #fff !important;
+  }
 </style>
