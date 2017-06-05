@@ -100,7 +100,7 @@
           stock: 0  // 库存
         },
         form: {num: 1, goodsId: '', assetSn: ''},
-        showModal: false,
+        showModal: true,
         alreadyHave: 0,
         orderId: ''
       }
@@ -186,9 +186,13 @@
       }
     }
     .dialog {
+      .img-box {
+        background-color: #5d80cc;
+        background: linear-gradient(#5d80cc, #fff); /* Standard syntax */
+      }
       .msg {
         text-align: center;
-        font-size: 18px;
+        font-size: 14px;
         color: #555;
         .num {
           color: #1492d5;

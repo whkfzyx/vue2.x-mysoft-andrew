@@ -73,7 +73,7 @@
   .weui-btn.weui-btn_primary {
     background-color: #4382c7;
     &:active {
-      background-color: #4382c7;
+      background-color: #4382c7 !important;
     }
   }
 
@@ -101,5 +101,21 @@
 
   .vux-number-input {
     font-size: 14px !important;
+  }
+
+  .weui-form-preview:after {
+    border-bottom: 0 none !important;
+  }
+
+  .vux-cell-bd.vux-cell-primary, .weui-cell > div > p {
+    color: #666;
+  }
+
+  .weui-cell__ft {
+    color: #000 !important;
+  }
+
+  .vux-number-selector.vux-number-selector-plus {
+    margin-right: 0 !important;
   }
 </style>

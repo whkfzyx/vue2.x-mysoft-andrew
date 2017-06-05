@@ -45,7 +45,7 @@
       }
     }
     .tips {
-      font-size: 16px;
+      font-size: 14px;
       color: #888;
     }
     .btns {
