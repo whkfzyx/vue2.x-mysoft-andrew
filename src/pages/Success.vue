@@ -40,7 +40,7 @@
       padding-top: 20px;
       padding-bottom: 20px;
       img {
-        width: 60%;
+        width: 50%;
         height: auto;
       }
     }

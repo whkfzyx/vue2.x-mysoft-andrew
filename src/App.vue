@@ -85,4 +85,8 @@
   .weui-tabbar:before {
     border-top: 0 none !important;
   }
+
+  .weui-dialog {
+    border-radius: 10px !important;
+  }
 </style>

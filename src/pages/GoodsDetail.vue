@@ -52,7 +52,7 @@
           领取成功！
         </div>
         <div>
-          你本月已经领取 <span class="num">{{alreadyHave}}</span> 个了～
+          不过你本月已经领取 <span class="num">{{alreadyHave}}</span> 个了～
         </div>
         <div>
           省着点用哦～
@@ -100,7 +100,7 @@
           stock: 0  // 库存
         },
         form: {num: 1, goodsId: '', assetSn: ''},
-        showModal: false,
+        showModal: true,
         alreadyHave: 0,
         orderId: ''
       }
