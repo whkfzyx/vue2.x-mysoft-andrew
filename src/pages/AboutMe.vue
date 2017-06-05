@@ -11,6 +11,7 @@
         <div class="date">{{getDateString(order)}}</div>
         <div class="overdue-badge" v-if="order.overTime"><img src="../assets/overdue.png"></div>
         <i class="arrow"></i>
+        <div class="mask" v-if="order.needReturn==0||order.returnDate!=0"></div>
       </li>
     </ul>
 
@@ -66,14 +67,14 @@
       },
       getDateString (item) {
         let str = ''
-        if (item.needReturn === 1 && item.returnDate === 0) {
+        if (item.needReturn === 1 && item.returnDate === 0 && item.shouldReturnDate !== 0) {
           str = '应还时间：' + moment(parseInt(item.shouldReturnDate) * 1000).format('YYYY-MM-DD')
-        } else if (item.needReturn === 1 && item.returnDate != 0) {
+        } else if (item.needReturn === 1 && item.returnDate !== 0) {
           str = '归还时间：' + moment(parseInt(item.returnDate) * 1000).format('YYYY-MM-DD')
-        } else if (item.needReturn == 1 && item.shouldReturnDate == 0) {
+        } else if (item.needReturn === 1 && item.shouldReturnDate === 0) {
           str = '归还时间：长期'
         } else {
-          str = '领用时间: ' + moment(parseInt(item.date) * 1000).format('YYYY-MM-DD')
+          str = '领用时间：' + moment(parseInt(item.date) * 1000).format('YYYY-MM-DD')
         }
 
         return str
@@ -98,6 +99,15 @@
         border-radius: 8px;
         box-shadow: 1px 1px 3px rgba(0, 0, 0, .1);
         margin: 10px 10px 0 10px;
+        .mask {
+          z-index: 2;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          background-color: rgba(255, 255, 255, .6);
+        }
         .row1 {
           &:after {
             display: block;
@@ -139,6 +149,7 @@
           }
         }
         i.arrow {
+          z-index: 3;
           position: absolute;
           right: 8px;
           top: 26px;

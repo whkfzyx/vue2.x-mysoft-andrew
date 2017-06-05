@@ -26,7 +26,7 @@
     data () {
       return {
         list: [],
-        orderInfo: {},
+        orderInfo: {}
       }
     },
     methods: {
