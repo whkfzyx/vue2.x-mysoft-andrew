@@ -31,7 +31,7 @@
     created: function () {
       let me = this
       fetch({
-        url: config.API_SERVER + 'getgoodslist?token=' + this.$route.query.token
+        url: config.API_SERVER + 'getgoodslist'
       }).then((result) => {
         me.typeList = result.data.typelist.reverse()
       }).catch(function (ex) {

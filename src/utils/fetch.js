@@ -1,10 +1,16 @@
 import axios from 'axios'
 import config from './config'
+import Vue from 'vue'
 
 export default function fetch (options) {
   return new Promise((resolve, reject) => {
     const instance = axios.create()
-    instance(options)
+    const token = Vue.cookie.get('token')
+
+    instance({
+      ...options,
+      url: options.url + (options.url.indexOf('?') >= 0 ? '&' : '?') + 'token=' + token
+    })
       .then(response => {
         const res = response.data
         if (!res.success) {

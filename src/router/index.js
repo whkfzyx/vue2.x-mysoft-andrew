@@ -5,6 +5,7 @@ import OrderDetail from '@/pages/OrderDetail'
 import GoodsDetail from '@/pages/GoodsDetail'
 import GoodsList from '@/pages/GoodsList'
 import Success from '@/pages/Success'
+import router from '../router'
 
 Vue.use(Router)
 
@@ -18,6 +19,13 @@ export default new Router({
       meta: {
         tab: true,
         title: '物品领用'
+      },
+      beforeEnter: (to, from, next) => {
+        if (to.query.token) {
+          Vue.cookie.set('token', to.query.token)
+          router.replace({path: '/'})
+        }
+        next()
       }
     },
     {

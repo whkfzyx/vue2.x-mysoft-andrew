@@ -46,7 +46,7 @@
         if (!this.reachLastPage) {
           this.loadingPage = true
           fetch({
-            url: config.API_SERVER + 'getmyborrowlist?page=' + (this.currentPage || this.$route.query.page || 1) + '&pageSize=' + (this.$route.query.pageSize || 20) + '&token=' + this.$route.query.token
+            url: config.API_SERVER + 'getmyborrowlist?page=' + (this.currentPage || this.$route.query.page || 1) + '&pageSize=' + (this.$route.query.pageSize || 20)
           }).then((result) => {
             this.list = this.list.concat(result.data.list)
             this.loadingPage = false

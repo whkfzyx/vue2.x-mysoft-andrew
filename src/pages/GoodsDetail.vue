@@ -118,7 +118,7 @@
           })
         } else {
           fetch({
-            url: config.API_SERVER + 'submitborrow?&token=' + this.$route.query.token,
+            url: config.API_SERVER + 'submitborrow',
             method: 'POST',
             data: {...this.form, goodsId: this.$route.query.goodsId}
           }).then((resp) => {
@@ -143,7 +143,7 @@
       },
       loadDetail () {
         fetch({
-          url: config.API_SERVER + 'getgoodsdetail?goodsId=' + this.$route.query.goodsId + '&token=' + this.$route.query.token
+          url: config.API_SERVER + 'getgoodsdetail?goodsId=' + this.$route.query.goodsId
         }).then((res) => {
           this.goodsInfo = res.data
         }).catch((res) => {

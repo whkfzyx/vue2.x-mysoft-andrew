@@ -16,6 +16,7 @@
     "fastclick": "^1.0.6",
     "moment": "^2.18.1",
     "vue": "^2.2.2",
+    "vue-cookie": "^1.1.4",
     "vue-mugen-scroll": "^0.2.5",
     "vue-router": "^2.2.0",
     "vue-router-title": "0.0.3",

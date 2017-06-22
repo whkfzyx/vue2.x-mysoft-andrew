@@ -32,7 +32,7 @@
     methods: {
       loadDetail () {
         fetch({
-          url: config.API_SERVER + 'getmyborrowdetail?token=' + this.$route.query.token + '&orderId=' + this.$route.query.orderId
+          url: config.API_SERVER + 'getmyborrowdetail?orderId=' + this.$route.query.orderId
         }).then((res) => {
           let d = res.data
           this.orderInfo = d

@@ -4,10 +4,21 @@ import VueRouter from 'vue-router'
 import App from './App'
 import router from './router'
 import VueRouterTitle from 'vue-router-title'
+import VueCookie from 'vue-cookie'
 
 Vue.use(VueRouter)
+Vue.use(VueCookie)
 
-import { LocalePlugin, DevicePlugin, ToastPlugin, AlertPlugin, ConfirmPlugin, LoadingPlugin, WechatPlugin, AjaxPlugin } from 'vux'
+import {
+  LocalePlugin,
+  DevicePlugin,
+  ToastPlugin,
+  AlertPlugin,
+  ConfirmPlugin,
+  LoadingPlugin,
+  WechatPlugin,
+  AjaxPlugin
+} from 'vux'
 Vue.use(DevicePlugin)
 Vue.use(ToastPlugin)
 Vue.use(AlertPlugin)
