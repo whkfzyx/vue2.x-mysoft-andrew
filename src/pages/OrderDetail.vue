@@ -9,7 +9,8 @@
 
     <form-preview header-label="产品名称"
                   :header-value="orderInfo.name"
-                  :body-items="list">
+                  :body-items="list"
+                  :footer-buttons="btnconfirm">
     </form-preview>
   </div>
 </template>
@@ -19,6 +20,7 @@
   import fetch from '../utils/fetch'
   import config from '../utils/config'
   import moment from 'moment'
+  import router from '../router'
 
   export default {
     name: 'orderDetail',
@@ -26,7 +28,14 @@
     data () {
       return {
         list: [],
-        orderInfo: {}
+        orderInfo: {},
+        btnconfirm: [{
+          style: 'primary',
+          text: '确定',
+          onButtonClick: (name) => {
+            router.push({path: '/about-me'})
+          }
+        }]
       }
     },
     methods: {
