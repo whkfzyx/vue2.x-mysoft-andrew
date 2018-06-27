@@ -18,6 +18,15 @@ Vue.use(LocalePlugin)
 
 FastClick.attach(document.body)
 
+Vue.prototype.$scrollB = () => {
+  const winH = window.innerHeight
+  const scrollTop = document.querySelector('#vux_view_box_body').scrollTop
+  const listH = document.querySelector('#vux_view_box_body').firstChild.offsetHeight
+  console.log(winH + ',' + scrollTop)
+  console.log(listH)
+  return winH + scrollTop >= listH
+}
+
 Vue.config.productionTip = false
 
 new Vue({

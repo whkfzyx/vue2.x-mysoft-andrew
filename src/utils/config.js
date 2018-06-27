@@ -3,6 +3,6 @@
  */
 
 export default {
-  API_SERVER: 'http://119.23.216.222:80/andrew/api/',
-  LOGIN_PAGE: 'http://webchattest.mingyuanyun.com:443/wechat/oauth/qy_oauth'
+  API_SERVER: 'http://zyx4.mingyuanyun.com/andrew/api/',
+  LOGIN_PAGE: 'http://zyx4.mingyuanyun.com/wechat/oauth/qy_oauth'
 }

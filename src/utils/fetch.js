@@ -10,8 +10,6 @@ export default function fetch (options) {
         if (!res.success) {
           // Token 过期了
           if (res.errcode === 4001) {
-            console.log(res.message)
-
             // 重新登录页
             location.href = config.LOGIN_PAGE
           }

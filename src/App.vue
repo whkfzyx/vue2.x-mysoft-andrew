@@ -1,5 +1,5 @@
 <template>
-  <div class="app-view">
+  <div class="app-view" id="app">
     <view-box ref="viewBox"
               :body-padding-bottom="$route.meta.tab ? '54px' : '0' ">
       <router-view class="view"></router-view>
